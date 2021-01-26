@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Employee">
+
+	<resultMap type='Employee' id='EmployeeResult'>
+		<id property='id' column='id' />
+		<result property='fname' column='fname' />
+		<result property='lname' column='lname' />
+		<result property='email' column='email' />
+		<result property='role' column='role' />
+	</resultMap>
+	<!-- Normal -->
+	<insert id="insert" parameterType="Employee" keyProperty='id'>
+		insert into
+		employee (fname, lname, email,role ) values (#{fname},
+		#{lname}, #{email}, #{role});
+	</insert>
+
+	<select id="getAll" resultMap="EmployeeResult">
+		select * from employee;
+	</select>
+
+	<select id="getById" parameterType="int" resultMap="EmployeeResult">
+		select * from
+		employee where id = #{id};
+	</select>
+
+
+	<update id="update" parameterType="Employee">
+		update employee set fname=#{fname},
+		lname=#{lname},
+		role=#{role},
+		email=#{email}
+		where id=#{id} ;
+	</update>
+	<delete id='deleteEmployee' parameterType='int'>
+		delete from employee where id=#{id};
+	</delete>
+	<delete id='deleteAll'>
+		delete from employee;
+	</delete>
+	
+	
+
+</mapper>
